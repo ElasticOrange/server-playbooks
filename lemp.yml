@@ -5,3 +5,4 @@
   roles:
     - mysql
     - nginx
+    - php
