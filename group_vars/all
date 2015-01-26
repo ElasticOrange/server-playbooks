@@ -1,0 +1,2 @@
+#nginx server configuration
+server_hostname: example.com

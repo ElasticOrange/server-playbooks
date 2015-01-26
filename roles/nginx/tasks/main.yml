@@ -4,3 +4,11 @@
   
  - name: Start nginx service
    service: name=nginx state=started
+
+ - name: Copy nginx hostname configuration
+   template: src=hostname.conf dest=/etc/nginx/sites-available/{{ server_hostname }}
+   notify: restart nginx
+   
+ - name: Create symlink to {{ server_hostname }}
+   file: src=/etc/nginx/sites-available/{{ server_hostname }} dest=/etc/nginx/sites-enabled/{{ server_hostname }} state=link
+   notify: reload nginx
