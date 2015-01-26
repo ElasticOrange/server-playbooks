@@ -10,6 +10,6 @@
     - php5-mysql
   
  - name: Start php service
-   service: name=php-fpm state=started
+   service: name=php5-fpm state=started
    notify:
     - restart mysql
