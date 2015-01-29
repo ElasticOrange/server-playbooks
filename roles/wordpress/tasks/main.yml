@@ -1,24 +1,24 @@
 ---
  - name: Download wordpress
-  get_url: url=http://wordpress.org/latest.tar.gz dest=/tmp/latest.tar.gz
+   get_url: url=https://wordpress.org/latest.tar.gz dest=/tmp/
 
- - name: Extract archive
-  command: chdir=/tmp/ /bin/tar/ xzf latest.tar.gz creates=/usr/share/nginx/wordpress
+ - name: Extract archive to tmp
+   unarchive: src=/tmp/latest.tar.gz dest=/usr/share/nginx/ copy=no   
  
  - name: Add group "wordpress"
-  group: name=wordpress
+   group: name=wordpress
 
  - name: Add user "wordpress"
-  user: name=wordpress group=wordpress home=/usr/share/nginx/wordpress/
+   user: name=wordpress group=wordpress home=/usr/share/nginx/wordpress/
   
  - name: Create wordpress database
-  mysql_db: name={{ wp_db_name }} state=present
+   mysql_db: name={{ wp_db_name }} state=present
 
  - name: Create wordpress db user
-  mysql_user: name={{ wp_db_user }} password={{ wp_db_password }} priv={{ wp_db_name }}.*:ALL host='localhost' state=present
+   mysql_user: name={{ wp_db_user }} password={{ wp_db_password }} priv={{ wp_db_name }}.*:ALL host='localhost' state=present
   
  - name: Copy wordpress config file
-  template: src=wp-config.php dest=/usr/share/nginx/wordpress/
+   template: src=wp-config.php dest=/usr/share/nginx/wordpress/
 
  - name: Change wordpress ownership
-  file: path=/usr/share/nginx/wordpress/ owner=wordpress group=wordpress state=directory recurse=yes
+   file: path=/usr/share/nginx/wordpress/ owner=wordpress group=wordpress state=directory recurse=yes
