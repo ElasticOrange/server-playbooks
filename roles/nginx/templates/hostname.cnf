@@ -26,5 +26,5 @@ server
         }
 
 	access_log /var/log/nginx/{{ server_hostname }}.log;
-	error_log /var/log/nginx/{{ server_hostname }}.log;
+	error_log /var/log/nginx/{{ server_hostname }}.error.log;
 }
