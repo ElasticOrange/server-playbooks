@@ -1,2 +1,7 @@
 #nginx server configuration
 server_hostname: example.com
+
+#Wordpress db settings
+wp_db_name: wordpress 
+wp_db_user: wordpress
+wp_db_password: mypasswordhere
