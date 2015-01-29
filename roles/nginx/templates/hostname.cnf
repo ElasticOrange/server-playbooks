@@ -2,10 +2,11 @@ server
 {
         listen   80;
 
-        root /usr/share/nginx/{{ server_hostname }};
+        root /usr/share/nginx/wordpress;
         index index.php index.html;
 
-        server_name {{ server_hostname }} www.{{ server_hostname }};
+       #server_name {{ server_hostname }} www.{{ server_hostname }};
+	server_name localhost;
 
         location /
         {
