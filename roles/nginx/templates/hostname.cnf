@@ -8,7 +8,7 @@ server
 
         #server_name {{ server_hostname }} www.{{ server_hostname }};
         server_name localhost;
-        
+
         location /
         {
                 try_files $uri $uri/ /index.php?q=$uri&$args;
