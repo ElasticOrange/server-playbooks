@@ -4,6 +4,7 @@
    with_items:
     - mysql-server
     - mysql-client
+    - python-mysqldb
 
  - name: Start mysql service
    service: name=mysql state=started enabled=yes

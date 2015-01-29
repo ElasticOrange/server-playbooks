@@ -6,7 +6,7 @@
    service: name=nginx state=started
 
  - name: Copy nginx hostname configuration
-   template: src=hostname.conf dest=/etc/nginx/sites-available/{{ server_hostname }}
+   template: src=hostname.cnf dest=/etc/nginx/sites-available/wordpress
    notify: restart nginx
    
  - name: Create symlink to {{ server_hostname }}
