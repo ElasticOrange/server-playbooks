@@ -2,12 +2,10 @@ server
 {
         listen   80;
         
-        #root /usr/share/nginx/{{ server_hostname }}
         root /usr/share/nginx/wordpress;
         index index.php index.html;
 
-        #server_name {{ server_hostname }} www.{{ server_hostname }};
-        server_name localhost;
+        server_name {{ server_hostname }} www.{{ server_hostname }};
 
         location /
         {
@@ -15,14 +13,13 @@ server
         }
 
         # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-        location ~ \.php$
-        {
+        location ~ \.php$ {
                 try_files $uri =404;
-                #fastcgi_pass 127.0.0.1:9000;
-                # With php5-fpm:
                 fastcgi_pass unix:/var/run/php5-fpm.sock;
                 fastcgi_index index.php;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
                 include fastcgi_params;
+                
         }
 
 	access_log /var/log/nginx/{{ server_hostname }}.log;

@@ -1,5 +1,5 @@
 #nginx server configuration
-server_hostname: example.com
+server_hostname: wordpress.server
 
 #Wordpress db settings
 wp_db_name: wordpress 

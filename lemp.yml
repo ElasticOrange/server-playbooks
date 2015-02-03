@@ -1,6 +1,6 @@
 ---
 - name: Install mysql, nginx, php-fpm, wordpress
-  hosts: web
+  hosts: test
 
   roles:
     - mysql

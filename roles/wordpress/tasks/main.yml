@@ -21,4 +21,4 @@
    template: src=wp-config.php dest=/usr/share/nginx/wordpress/
 
  - name: Change wordpress ownership
-   file: path=/usr/share/nginx/wordpress/ owner=wordpress group=wordpress state=directory recurse=yes
+   file: path=/usr/share/nginx/wordpress/ owner=www-data group=www-data state=directory recurse=yes
