@@ -1,0 +1,22 @@
+---
+ - name: Install mysql package
+   apt: name={{ item }} state=present
+   with_items:
+    - mysql-server
+    - mysql-client
+    - python-mysqldb
+
+ - name: Start mysql service
+   service: name=mysql state=started enabled=yes
+   
+ - name: Create servermail database
+   mysql_db: name={{ mail_db_name }} state=present
+
+ - name: Create servermail db user
+   mysql_user: name={{ mail_db_user }} password={{ mail_db_password }} priv={{ mail_db_name }}.*:ALL host='localhost' state=present
+   
+ - name: Copy mysql db table format
+   template: src=dump.sql dest=/tmp/dump.sql
+   
+ - name: 5b. Insert table data
+   shell: cat /tmp/dump.sql | mysql -u {{ mail_db_user }} -p{{ mail_db_password }} {{ mail_db_name }}

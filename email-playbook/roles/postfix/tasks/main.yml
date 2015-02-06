@@ -1,0 +1,52 @@
+---
+ - name: install postfix package
+   apt: name={{ item }} state=present
+   with_items:
+    - postfix
+    - postfix-mysql
+
+ - name: add /etc/mailname
+   template: src=mailname dest=/etc/
+ 
+ - name: start postfix service
+   service: name=postfix state=started enabled=yes
+
+ - name: write Postfix configuration template
+   template: >
+     src=main-cf.j2 dest={{ postfix_dir }}/main.cf
+     mode=0644 owner=root group=root
+     backup=yes
+   notify:
+    - restart postfix
+    
+ - name: add Postfix mysql-virtual-mailbox-domains.cf
+   template: >
+    src=mysql-virtual-mailbox-domains-cf.j2
+    dest={{ postfix_dir }}/mysql-virtual-mailbox-domains.cf
+    mode=0644 owner=root group=root
+   notify:
+    - restart postfix
+    
+ - name: add Postfix mysql-virtual-mailbox-maps.cf
+   template: >
+    src=mysql-virtual-mailbox-maps-cf.j2
+    dest={{ postfix_dir }}/mysql-virtual-mailbox-maps.cf
+    mode=0644 owner=root group=root
+   notify:
+    - restart postfix
+    
+ - name: add Postfix mysql-virtual-alias-maps.cf
+   template: >
+    src=mysql-virtual-alias-maps-cf.j2
+    dest={{ postfix_dir }}/mysql-virtual-alias-maps.cf
+    mode=0644 owner=root group=root
+   notify:
+    - restart postfix
+    
+ - name: add Postfix master.cf
+   template: >
+    src=master-cf.j2
+    dest={{ postfix_dir }}/master.cf
+    mode=0644 owner=root group=root
+   notify:
+    - restart postfix

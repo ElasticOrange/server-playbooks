@@ -1,0 +1,10 @@
+---
+ - name: Install mysql, postfix, dovecot, spamassasin
+   hosts: test
+   
+   roles:
+     - mysql
+     - postfix
+     #- dovecot
+     #- spamassasin
+ 
