@@ -6,5 +6,5 @@
      - mysql
      - postfix
      - dovecot
-     - spamassasin
+     - spamassassin
  

@@ -1,0 +1,18 @@
+---
+ - name: install spamassassin package
+   apt: name={{ item }} state=present
+   with_items:
+    - spamassassin
+    - spamc
+
+ - name: create spamd user
+   user: name=spamd state=present home=/home/spamd shell=/bin/bash
+   notify: start spamassassin
+   
+ - name: add spamassassin config
+   template: src=spamassassin.conf dest=/etc/default/spamassassin
+   notify: restart spamassassin
+    
+ - name: set up the anti-spam rules
+   template: src=local.cf dest=/etc/spamassassin/local.cf
+   notify: restart spamassassin

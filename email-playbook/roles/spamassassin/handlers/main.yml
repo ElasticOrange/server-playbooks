@@ -1,0 +1,9 @@
+---
+ - name: restart postfix
+   service: name=postfix state=restarted enabled=yes
+  
+ - name: start spamassassin
+   shell: service spamassassin start
+  
+ - name: "restart spamassassin"
+   shell: service spamassassin restart
