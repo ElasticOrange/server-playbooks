@@ -21,3 +21,9 @@
      - 10-master.conf
      - 10-ssl.conf
    notify: restart dovecot
+   
+ - name: create vmail group
+   group: name=vmail state=present gid=5000
+   
+ - name: create vmail user
+   user: name=vmail group=vmail state=present uid=5000 home=/decrypted shell=/usr/sbin/nologin
