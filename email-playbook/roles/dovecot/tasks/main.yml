@@ -8,19 +8,22 @@
     - dovecot-mysql
     
  - name: copy configuration files to dovecot folder
-   template: src={{ item }} dest=/etc/dovecot/{{ item }}
-    with_items:
-     - dovecot.conf
-     - dovecot-sql.conf.ext
+   template: src=dovecot.conf dest=/etc/dovecot/dovecot.conf
+     
+ - name: copy configuration files to dovecot folder
+   template: src=dovecot-sql.conf.ext dest=/etc/dovecot/dovecot-sql.conf.ext
   
  - name: copy configuration files to dovecot/conf.d folder
-   template: src={{ item }} dest=/etc/dovecot/conf.d/{{ item }}
-    with_items:
-     - 10-auth.conf
-     - 10-mail.conf
-     - 10-master.conf
-     - 10-ssl.conf
-   notify: restart dovecot
+   template: src=10-auth.conf dest=/etc/dovecot/conf.d/10-auth.conf
+
+ - name: copy configuration files to dovecot/conf.d folder
+   template: src=10-mail.conf dest=/etc/dovecot/conf.d/10-mail.conf
+
+ - name: copy configuration files to dovecot/conf.d folder
+   template: src=10-master.conf dest=/etc/dovecot/conf.d/10-master.conf
+     
+ - name: copy configuration files to dovecot/conf.d folder
+   template: src=10-ssl.conf dest=/etc/dovecot/conf.d/10-ssl.conf
    
  - name: create vmail group
    group: name=vmail state=present gid=5000
