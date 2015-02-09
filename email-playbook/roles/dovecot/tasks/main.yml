@@ -27,3 +27,7 @@
    
  - name: create vmail user
    user: name=vmail group=vmail state=present uid=5000 home=/decrypted shell=/usr/sbin/nologin
+   
+ - name: permissions on dovecot config directory
+   file: state=directory path=/etc/dovecot group=dovecot owner=vmail mode=770 recurse=yes
+  notify: restart dovecot
