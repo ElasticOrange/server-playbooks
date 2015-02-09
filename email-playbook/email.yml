@@ -5,6 +5,6 @@
    roles:
      - mysql
      - postfix
-     #- dovecot
+     - dovecot
      #- spamassasin
  
