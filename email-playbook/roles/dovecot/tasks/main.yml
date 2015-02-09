@@ -27,6 +27,12 @@
    
  - name: create vmail user
    user: name=vmail group=vmail state=present uid=5000 home=/decrypted shell=/usr/sbin/nologin
+
+ - name: create directory for each domain
+   file: path=/var/mail/vhosts/{{ domain_com }} state=directory recurse=yes
+   
+ - name: change /var/mail ownership
+   file: path=/var/mail owner=vmail group=vmail state=directory recurse=yes
    
  - name: permissions on dovecot config directory
    file: state=directory path=/etc/dovecot group=dovecot owner=vmail mode=770 recurse=yes
