@@ -1,0 +1,23 @@
+---
+ - name: install spamassasin package
+   apt: name={{ item }} state=present
+   with_items:
+    - spamassassin
+    - spamc
+
+ - name: add spamassasin config
+   template: >
+    src=spamassasin.conf
+    dest=/etc/default/spamassassin
+    
+ - name: set up the anti-spam rules
+   template: >
+    src=local.cf
+    dest=/etc/spamassasin/local.cf
+    
+ - name: create spamd user
+   user: name=spamd state=present home=/decrypted shell=/usr/sbin/nologin
+
+ - name: start spamassasin service
+   service: name=spamassasin state=started enabled=yes
+   notify: restart postfix

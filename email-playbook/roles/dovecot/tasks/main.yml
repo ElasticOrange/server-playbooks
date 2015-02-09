@@ -6,7 +6,10 @@
     - dovecot-imapd
     - dovecot-lmtpd
     - dovecot-mysql
-    
+
+ - name: start dovecot service
+   service: name=dovecot state=started enabled=yes
+
  - name: copy configuration files to dovecot folder
    template: src=dovecot.conf dest=/etc/dovecot/dovecot.conf
      
@@ -39,3 +42,5 @@
    
  - name: permissions on dovecot config directory
    file: path=/etc/dovecot group=dovecot owner=vmail mode=770 state=directory recurse=yes
+   notify:
+    - restart dovecot
