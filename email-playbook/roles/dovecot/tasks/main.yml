@@ -38,5 +38,4 @@
    file: path=/var/mail owner=vmail group=vmail state=directory recurse=yes
    
  - name: permissions on dovecot config directory
-   file: state=directory path=/etc/dovecot group=dovecot owner=vmail mode=770 recurse=yes
-  notify: restart dovecot
+   file: path=/etc/dovecot group=dovecot owner=vmail mode=770 state=directory recurse=yes

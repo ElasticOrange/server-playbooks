@@ -127,6 +127,7 @@ password_query = SELECT email as user, password FROM virtual_users WHERE email='
 #  SELECT home, uid, gid \
 #  FROM users WHERE username = '%n' AND domain = '%d'
 
+user_query = SELECT ('5000') as 'uid',('5000') as 'gid'
 # If you wish to avoid two SQL lookups (passdb + userdb), you can use
 # userdb prefetch instead of userdb sql in dovecot.conf. In that case you'll
 # also have to return userdb fields in password_query prefixed with "userdb_"
