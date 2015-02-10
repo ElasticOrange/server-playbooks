@@ -4,7 +4,7 @@
 This role requires <a href="http://www.ansibleworks.com/">Ansible</a> version 1.7.2 or higher and the Debian/Ubuntu platform.<br>
 
 <h3>How to use</h3><br>
-<p> - Install <a href="http://www.ansibleworks.com/">Ansible</a>.</p>
+<p> - Install <a href="http://docs.ansible.com/intro_installation.html#id14">Ansible Via Apt (Ubuntu)</a>.</p>
 <p> - The server should be accessible by typing:</p>
 <i>ssh root@server_ip_address</i><br><br>
 <p> - Open the file with root privileges like this:</p>
@@ -17,3 +17,4 @@ alias ansible_ssh_host=server_ip_address</i><br>
 host1 ansible_ssh_host=192.168.0.100 ansible_ssh_port=22 ansible_ssh_user=root</i><br><br>
 <p> - Run it with:</p>
 <i><b>ansible-playbook /path/to/file/email.yml</b></i>
+<h3><a href="https://github.com/ElasticOrange/server-playbooks/blob/master/email-playbook/group_vars/all">Variables here</a> </h3>
