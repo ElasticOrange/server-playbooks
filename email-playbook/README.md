@@ -19,22 +19,22 @@ host1 ansible_ssh_host=192.168.0.100 ansible_ssh_port=22 ansible_ssh_user=root</
 <code><b>ansible-playbook /path/to/file/email.yml</b></code>
 <h3>Variables here</h3>
 <code>
-#servermail mysql database settings
+//servermail mysql database settings
 mail_db_name: servermail 
 mail_db_user: usermail
 mail_db_password: mypasswordhere
 
-#email domains you want to use
+//email domains you want to use
 domain_com: example.com
 hostname_domain_com: hostname.example.com
 
-#add email account: user@domain.com with account_password
+//add email account: user@domain.com with account_password
 account_password: firstpassword
 useratdomain_com: rambo@example.com
 user: rambo
 
-#add alias email. all emails from alias will be sent to
-#user@domain.com
+//add alias email. all emails from alias will be sent to
+//user@domain.com
 aliasatdomain_com: stallone@example.com
 alias: stallone
 
