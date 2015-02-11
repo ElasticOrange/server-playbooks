@@ -10,6 +10,21 @@
  - name: start dovecot service
    service: name=dovecot state=started enabled=yes
 
+ - name: create certificates directory
+   file: path=/etc/dovecot/certs/ owner=dovecot group=dovecot state=directory
+
+ - name: create cacert file
+   copy: dest=/etc/dovecot/certs/mail-cacert.pem owner=dovecot group=dovecot content="/C={{ Country }}/ST={{ State }}/L={{ Locality }}/O={{ Organization }}/OU={{ OrgUnit }}/CN={{ FQDN }}"
+
+ - name: create self-signed certificates
+   command: openssl req -new -nodes -x509 -subj "/C={{ Country }}/ST={{ State }}/L={{ Locality }}/O={{ Organization }}/OU={{ OrgUnit }}/CN={{ FQDN }}" -days 3650 -keyout /etc/dovecot/certs/mail_key.pem -out /etc/dovecot/certs/mail_cert.pem -extensions v3_ca creates=/etc/dovecot/certs/mail_cert.pem
+
+ - name: Dovecot |  Set permission for self-signed certificates
+   file: path=/etc/dovecot/certs/{{ item }} state=touch owner=dovecot group=dovecot
+  with_items:
+    - mail_key.pem
+    - mail_cert.pem
+
  - name: copy configuration files to dovecot folder
    template: src=dovecot.conf dest=/etc/dovecot/dovecot.conf
      
