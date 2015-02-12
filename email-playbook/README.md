@@ -18,9 +18,11 @@ ssh root@server_ip_address
 sudo nano /etc/ansible/hosts
 ```
 
-```The syntax we are going to use though looks something like this:
-```[group_name]
-```alias ansible_ssh_host=server_ip_address
+```
+The syntax we are going to use though looks something like this:
+[group_name]
+alias ansible_ssh_host=server_ip_address
+```
 
 * You should have something like:
 ```
