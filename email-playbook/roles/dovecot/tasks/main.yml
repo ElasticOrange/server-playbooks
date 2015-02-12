@@ -19,9 +19,9 @@
  - name: create self-signed certificates
    command: openssl req -new -nodes -x509 -subj "/C={{ Country }}/ST={{ State }}/L={{ Locality }}/O={{ Organization }}/OU={{ OrgUnit }}/CN={{ FQDN }}" -days 3650 -keyout /etc/dovecot/certs/mail_key.pem -out /etc/dovecot/certs/mail_cert.pem -extensions v3_ca creates=/etc/dovecot/certs/mail_cert.pem
 
- - name: Dovecot |  Set permission for self-signed certificates
+ - name: set permission for self-signed certificates
    file: path=/etc/dovecot/certs/{{ item }} state=touch owner=dovecot group=dovecot
-  with_items:
+   with_items:
     - mail_key.pem
     - mail_cert.pem
 

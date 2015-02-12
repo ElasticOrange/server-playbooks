@@ -10,6 +10,21 @@
  
  - name: start postfix service
    service: name=postfix state=started enabled=yes
+   
+ - name: create certificates directory
+   file: path=/etc/postfix/certs/ owner=postfix group=postfix state=directory
+
+ - name: create cacert file
+   copy: dest=/etc/postfix/certs/mail-cacert.pem owner=postfix group=postfix content="/C={{ Country }}/ST={{ State }}/L={{ Locality }}/O={{ Organization }}/OU={{ OrgUnit }}/CN={{ FQDN }}"
+
+ - name: create self-signed certificates
+   command: openssl req -new -nodes -x509 -subj "/C={{ Country }}/ST={{ State }}/L={{ Locality }}/O={{ Organization }}/OU={{ OrgUnit }}/CN={{ FQDN }}" -days 3650 -keyout /etc/postfix/certs/mail_key.pem -out /etc/postfix/certs/mail_cert.pem -extensions v3_ca creates=/etc/postfix/certs/mail_cert.pem
+
+ - name: set permission for self-signed certificates
+   file: path=/etc/postfix/certs/{{ item }} state=touch owner=postfix group=postfix
+   with_items:
+    - mail_key.pem
+    - mail_cert.pem
 
  - name: write Postfix configuration template
    template: >

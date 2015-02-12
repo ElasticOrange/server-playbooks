@@ -19,14 +19,16 @@ host1 ansible_ssh_host=192.168.0.100 ansible_ssh_port=22 ansible_ssh_user=root</
 <code><b>ansible-playbook /path/to/file/email.yml</b></code>
 <h3>Variables here</h3>
 
-servermail mysql database settings
+servermail mysql database settings<br>
 <code>mail_db_name: servermail</code> 
 <code>mail_db_user: usermail</code>
 <code>mail_db_password: mypasswordhere</code>
 
-email domains you want to use
-<code>domain_com: example.com</code>
-<code>hostname_domain_com: hostname.example.com</code>
+email domains you want to use<br />
+<code>
+domain_com: example.com
+hostname_domain_com: hostname.example.com
+</code>
 
 add email account: user@domain.com with account_password
 <code>account_password: firstpassword</code>
@@ -39,3 +41,19 @@ user@domain.com
 <code>alias: stallone</code>
 
 <code>postfix_dir: /etc/postfix</code>
+
+ssl self-signed certificates
+Country Name (2 letter code) [AU]:RO
+State or Province Name (full name) [Some-State]:Bucharest
+Locality Name (eg, city) []:Bucharest
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:
+Organizational Unit Name (eg, section) []:IT
+Common Name (e.g. server FQDN or YOUR name) []:{{ domain_com }}
+<code>
+Country: RO
+State: Bucharest
+Locality: Bucharest
+Organization: Elasticorange
+OrgUnit: IT
+FQDN: example.com
+</code>
