@@ -1,11 +1,11 @@
-#Mail Server Using <a href="http://www.postfix.org/">Postfix</a>, <a href="http://www.dovecot.org/">Dovecot</a>, <a href="http://www.mysql.com/">MySQL</a>, and <a href="http://spamassassin.apache.org/">SpamAssasin</a>
+##Mail Server Using <a href="http://www.postfix.org/">Postfix</a>, <a href="http://www.dovecot.org/">Dovecot</a>, <a href="http://www.mysql.com/">MySQL</a>, and <a href="http://spamassassin.apache.org/">SpamAssasin</a>
 
 ##Requirements
 --------------
 This role requires <a href="http://www.ansibleworks.com/">Ansible</a> version 1.7.2 or higher and the Debian/Ubuntu platform.
 
 ##How to use
-------------
+
 * Install <a href="http://docs.ansible.com/intro_installation.html#id14">Ansible Via Apt (Ubuntu)</a> on your local machine.
 
 * The remote server should be accessible through ssh by typing:
@@ -30,7 +30,7 @@ alias ansible_ssh_host=server_ip_address
 host1 ansible_ssh_host=192.168.0.100 ansible_ssh_port=22 ansible_ssh_user=root
 ```
 
-* Run it with:
+* Run it on local machine with:
 ```
 ansible-playbook /path/to/file/email.yml
 ```
