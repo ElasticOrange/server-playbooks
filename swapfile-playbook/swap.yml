@@ -1,0 +1,6 @@
+---
+ - name: add swapfile
+   hosts: test
+   
+   roles:
+   - swap
