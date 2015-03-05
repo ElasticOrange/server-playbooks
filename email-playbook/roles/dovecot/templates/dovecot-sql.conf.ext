@@ -105,7 +105,7 @@ default_pass_scheme = SHA512-CRYPT
 #password_query = \
 #  SELECT username, domain, password \
 #  FROM users WHERE username = '%n' AND domain = '%d'
-password_query = SELECT email as user, password FROM virtual_users WHERE email='%u'; 
+#password_query = SELECT email as user, password FROM virtual_users WHERE email='%u'; 
 
 # userdb query to retrieve the user information. It can return fields:
 #   uid - System UID (overrides mail_uid setting)
@@ -139,3 +139,8 @@ user_query = SELECT ('5000') as 'uid',('5000') as 'gid'
 
 # Query to get a list of all usernames.
 #iterate_query = SELECT username AS user FROM users
+password_query = \
+  SELECT username AS user, password, \
+    homedir AS userdb_home, uid AS userdb_uid, gid AS userdb_gid \
+  FROM mailbox WHERE username = '%u'
+iterate_query = SELECT username AS user FROM mailbox

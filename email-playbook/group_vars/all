@@ -1,21 +1,21 @@
 #servermail mysql database settings
-mail_db_name: servermail 
-mail_db_user: usermail
-mail_db_password: mypasswordhere
+mail_db_name: vimbadmin 
+mail_db_user: vimbadmin
+mail_db_password: giaiw96Wq7BCNxYf3zSvgel
 
 #email domains you want to use
-domain_com: example.com
-hostname_domain_com: hostname.example.com
+domain_com: redgoblin.ro
+hostname_domain_com: mail.redgoblin.ro
 
 #add email account: user@domain.com with account_password
-account_password: firstpassword
-useratdomain_com: rambo@example.com
-user: rambo
+account_password: redgoblinadmin
+useratdomain_com: admin@redgoblin.ro
+user: admin
 
 #add alias email. all emails from alias will be sent to
 #user@domain.com
-aliasatdomain_com: stallone@example.com
-alias: stallone
+aliasatdomain_com: postmaster@redgoblin.ro
+alias: postmaster
 
 postfix_dir: /etc/postfix
 
@@ -29,6 +29,6 @@ postfix_dir: /etc/postfix
 Country: RO
 State: Bucharest
 Locality: Bucharest
-Organization: Elasticorange
+Organization: RedGoblin
 OrgUnit: IT
-FQDN: example.com
+FQDN: redgoblin.ro
