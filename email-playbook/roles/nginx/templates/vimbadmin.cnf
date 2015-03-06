@@ -2,7 +2,7 @@ server
 {
         listen   80;
         
-        root {{ vim_path }};
+        root {{ vim_path }}/public;
         index index.php index.html;
 
         server_name {{ vim_server_hostname }} www.{{ vim_server_hostname }};

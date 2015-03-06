@@ -1,20 +1,17 @@
 ---
  - name: git clone vimbadmin to {{ vim_path }}
-   shell: git clone https://github.com/opensolutions/ViMbAdmin.git {{ vim_path }}
+   git: repo=https://github.com/opensolutions/ViMbAdmin.git dest={{ vim_path }}
 
- - name: install Composer into the current directory
+ - name: download Composer
    shell: curl -sS https://getcomposer.org/installer | php
 
  - name: move Composer into globally-accessible location
    shell: mv composer.phar /usr/local/bin/composer
 
  - name: composer install vimbadmin
-   composer: command=install working_dir={{ vim_path }}
-    environment:
-     COMPOSER_PROCESS_TIMEOUT: 600
-
- - name: set the ownership on the vimbadmin/var/ directory
-   file: path={{ vim_path }}/var group=www-data owner=www-data state=directory recurse=yes
+   composer: working_dir={{ vim_path }}
+   environment:
+    COMPOSER_PROCESS_TIMEOUT: 4000
 
  - name: copy application.ini files to vimbadmin folder
    template: src=application.ini dest={{ vim_path }}/application/configs/application.ini
@@ -23,4 +20,7 @@
    shell: cp {{ vim_path }}/public/.htaccess.dist {{ vim_path }}/public/.htaccess
 
  - name: create the database schema
-   shell: cd {{ vim_path }} | ./bin/doctrine2-cli.php orm:schema-tool:create
+   command: ./bin/doctrine2-cli.php orm:schema-tool:create chdir={{ vim_path }}
+
+ - name: set the ownership on the vimbadmin/var/ directory
+   file: path={{ vim_path }}/var group=www-data owner=www-data state=directory recurse=yes

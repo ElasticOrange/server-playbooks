@@ -6,9 +6,9 @@
      - mysql
      - php
      - vimbadmin
-     - postfix
-     - dovecot
-     - spamassassin
-     - roundcube
+     # - postfix
+     # - dovecot
+     # - spamassassin
+     # - roundcube
      - nginx
  

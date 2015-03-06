@@ -13,6 +13,6 @@
     - php-gettext
   
  - name: Start php service
-   service: name=php5-fpm state=started enabled=yes
-     notify:
+   service: name=php5-fpm state=started
+   notify:
       - restart php
