@@ -5,6 +5,9 @@
     - mysql-server
     - mysql-client
     - python-mysqldb
+    - bcrypt
+    - git
+    - curl
 
  - name: start mysql service
    service: name=mysql state=started enabled=yes

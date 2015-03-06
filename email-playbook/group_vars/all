@@ -24,6 +24,9 @@ alias: postmaster
 
 postfix_dir: /etc/postfix
 
+#vimbadmin install path
+vim_path: /usr/local/vimbadmin
+
 #ssl self-signed certificates
 #Country Name (2 letter code) [AU]:RO
 #State or Province Name (full name) [Some-State]:Bucharest
