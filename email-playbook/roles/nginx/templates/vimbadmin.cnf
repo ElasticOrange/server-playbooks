@@ -1,0 +1,27 @@
+server
+{
+        listen   80;
+        
+        root {{ vim_path }};
+        index index.php index.html;
+
+        server_name {{ vim_server_hostname }} www.{{ vim_server_hostname }};
+
+        location /
+        {
+                try_files $uri $uri/ /index.php?q=$uri&$args;
+        }
+
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        location ~ \.php$ {
+                try_files $uri =404;
+                fastcgi_pass unix:/var/run/php5-fpm.sock;
+                fastcgi_index index.php;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                include fastcgi_params;
+                
+        }
+
+	access_log /var/log/nginx/{{ vim_server_hostname }}.log;
+	error_log /var/log/nginx/{{ vim_server_hostname }}.error.log;
+}

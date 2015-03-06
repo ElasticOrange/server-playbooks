@@ -8,6 +8,9 @@ round_db_name: roundcubemail
 round_db_user: roundcube
 round_db_password: secretpassword
 
+#nginx config for vimbadmin and roundcube
+vim_server_hostname: mailadmin.example.com
+
 #email domains you want to use
 domain_com: example.com
 hostname_domain_com: mail.example.com
