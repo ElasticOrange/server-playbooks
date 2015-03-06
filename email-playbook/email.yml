@@ -4,7 +4,10 @@
    
    roles:
      - mysql
+     - php
+     - vimbadmin
      - postfix
      - dovecot
      - spamassassin
+     - roundcube
  

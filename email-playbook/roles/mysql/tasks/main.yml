@@ -9,14 +9,20 @@
  - name: start mysql service
    service: name=mysql state=started enabled=yes
    
- - name: create servermail database
+ - name: create mail and vimbadmin database
    mysql_db: name={{ mail_db_name }} state=present
 
- - name: create servermail db user
+ - name: create mail and vimbadmin db user
    mysql_user: name={{ mail_db_user }} password={{ mail_db_password }} priv={{ mail_db_name }}.*:ALL host='localhost' state=present
    
- - name: copy mysql db table format
-   template: src=dump.sql dest=/tmp/dump.sql
+ - name: create roundcube database
+   mysql_db: name={{ round_db_name }} state=present
+
+ - name: create roundcube db user
+   mysql_user: name={{ round_db_user }} password={{ round_db_password }} priv={{ round_db_name }}.*:ALL host='localhost' state=present
    
- - name: insert table data
-   shell: cat /tmp/dump.sql | mysql -u {{ mail_db_user }} -p{{ mail_db_password }} {{ mail_db_name }}
+ # - name: copy mysql db table format
+ #   template: src=dump.sql dest=/tmp/dump.sql
+   
+ # - name: insert table data
+ #   shell: cat /tmp/dump.sql | mysql -u {{ mail_db_user }} -p{{ mail_db_password }} {{ mail_db_name }}
