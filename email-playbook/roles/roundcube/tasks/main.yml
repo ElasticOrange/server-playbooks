@@ -7,34 +7,42 @@
  - name: unarchive roundcube
    unarchive: >
      src=/tmp/roundcubemail.tar.gz
-     dest=/usr/share/nginx/ copy=no
+     dest={{ round_path }} copy=no
 
  - name: change folder name to roundcubemail
    command: >
-     creates="/usr/share/nginx/roundcubemail" 
-     mv /usr/share/nginx/roundcubemail-1.1.0 /usr/share/nginx/roundcubemail
+     creates="{{ round_path }}/roundcubemail" 
+     mv {{ round_path }}/roundcubemail-1.1.0 {{ round_path }}/roundcubemail
 
  - name: change composer.json-dist to composer.json
    command: >
-     creates="/usr/share/nginx/roundcubemail/composer.json" 
-     mv /usr/share/nginx/roundcubemail/composer.json-dist /usr/share/nginx/roundcubemail/composer.json
+     creates="{{ round_path }}/roundcubemail/composer.json" 
+     mv {{ round_path }}/roundcubemail/composer.json-dist {{ round_path }}/roundcubemail/composer.json
 
  - name: composer install roundcubemail
-   composer: working_dir=/usr/share/nginx/roundcubemail
+   composer: working_dir={{ round_path }}/roundcubemail
    environment:
     COMPOSER_PROCESS_TIMEOUT: 4000
 
  - name: Change roundcube/temp ownership
    file: >
-     path=/usr/share/nginx/roundcubemail/temp 
+     path={{ round_path }}/roundcubemail/temp 
      owner=www-data group=www-data 
      state=directory recurse=yes
 
  - name: Change roundcube/temp ownership
    file: >
-     path=/usr/share/nginx/roundcubemail/logs 
+     path={{ round_path }}/roundcubemail/logs 
      owner=www-data group=www-data 
      state=directory recurse=yes
 
+ # - name: change config.inc.php.sample to config.inc.php
+ #   command: >
+ #     creates="{{ round_path }}/roundcubemail/config/config.inc.php" 
+ #     cp {{ round_path }}/roundcubemail/config/config.inc.php.sample {{ round_path }}/roundcubemail/config/config.inc.php
+
  - name: copy config.inc.php files to roundcubemail folder
-   template: src=config.inc.php dest=/usr/share/nginx/roundcubemail/config/config.inc.php
+   template: src=config.inc.php dest={{ round_path }}/roundcubemail/config/config.inc.php
+   notify:
+    - restart postfix
+    - restart dovecot

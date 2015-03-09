@@ -1,13 +1,13 @@
 ---
- - name: Install mysql, postfix, dovecot, spamassasin
+ - name: Install mysql php vimbadmin postfix dovecot spamassassin roundcube nginx
    hosts: test
 
    roles:
-     # - mysql
-     # - php
-     # - vimbadmin
-     # - postfix
-     # - dovecot
-     # - spamassassin
-     - roundcube
+     - mysql
+     - php
+     - vimbadmin
+     - postfix
+     - dovecot
+     - spamassassin
      - nginx
+     - roundcube
