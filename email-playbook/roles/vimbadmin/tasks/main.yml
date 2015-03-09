@@ -6,7 +6,7 @@
    shell: curl -sS https://getcomposer.org/installer | php
 
  - name: move Composer into globally-accessible location
-   shell: mv composer.phar /usr/local/bin/composer
+   command: creates="/usr/local/bin/composer" mv composer.phar /usr/local/bin/composer
 
  - name: composer install vimbadmin
    composer: working_dir={{ vim_path }}
@@ -17,7 +17,7 @@
    template: src=application.ini dest={{ vim_path }}/application/configs/application.ini
 
  - name: rename .htaccess.dist to .htaccess
-   shell: cp {{ vim_path }}/public/.htaccess.dist {{ vim_path }}/public/.htaccess
+   command: creates="{{ vim_path }}/public/.htaccess" cp {{ vim_path }}/public/.htaccess.dist {{ vim_path }}/public/.htaccess
 
  - name: create the database schema
    command: ./bin/doctrine2-cli.php orm:schema-tool:create chdir={{ vim_path }}

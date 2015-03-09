@@ -1,0 +1,40 @@
+---
+ - name: download roundcube
+   get_url: >
+     url=http://downloads.sourceforge.net/project/roundcubemail/roundcubemail/1.1.0/roundcubemail-1.1.0-complete.tar.gz 
+     dest=/tmp/roundcubemail.tar.gz
+
+ - name: unarchive roundcube
+   unarchive: >
+     src=/tmp/roundcubemail.tar.gz
+     dest=/usr/share/nginx/ copy=no
+
+ - name: change folder name to roundcubemail
+   command: >
+     creates="/usr/share/nginx/roundcubemail" 
+     mv /usr/share/nginx/roundcubemail-1.1.0 /usr/share/nginx/roundcubemail
+
+ - name: change composer.json-dist to composer.json
+   command: >
+     creates="/usr/share/nginx/roundcubemail/composer.json" 
+     mv /usr/share/nginx/roundcubemail/composer.json-dist /usr/share/nginx/roundcubemail/composer.json
+
+ - name: composer install roundcubemail
+   composer: working_dir=/usr/share/nginx/roundcubemail
+   environment:
+    COMPOSER_PROCESS_TIMEOUT: 4000
+
+ - name: Change roundcube/temp ownership
+   file: >
+     path=/usr/share/nginx/roundcubemail/temp 
+     owner=www-data group=www-data 
+     state=directory recurse=yes
+
+ - name: Change roundcube/temp ownership
+   file: >
+     path=/usr/share/nginx/roundcubemail/logs 
+     owner=www-data group=www-data 
+     state=directory recurse=yes
+
+ - name: copy config.inc.php files to roundcubemail folder
+   template: src=config.inc.php dest=/usr/share/nginx/roundcubemail/config/config.inc.php

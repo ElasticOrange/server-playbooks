@@ -1,14 +1,22 @@
 ---
  - name: Install nginx package
    apt: name=nginx state=present
-  
+
  - name: Start nginx service
    service: name=nginx state=started
 
- - name: Copy nginx hostname configuration
+ - name: Copy nginx hostname configuration vimbadmin
    template: src=vimbadmin.cnf dest=/etc/nginx/sites-available/{{ vim_server_hostname }}
-   notify: restart nginx
-   
+   notify: reload nginx
+
  - name: Create symlink to {{ vim_server_hostname }}
    file: src=/etc/nginx/sites-available/{{ vim_server_hostname }} dest=/etc/nginx/sites-enabled/{{ vim_server_hostname }} state=link
+   notify: restart nginx
+
+ - name: Copy nginx hostname configuration roundcubemail
+   template: src=roundcubemail.cnf dest=/etc/nginx/sites-available/{{ round_server_hostname }}
    notify: reload nginx
+
+ - name: Create symlink to {{ round_server_hostname }}
+   file: src=/etc/nginx/sites-available/{{ round_server_hostname }} dest=/etc/nginx/sites-enabled/{{ round_server_hostname }} state=link
+   notify: restart nginx

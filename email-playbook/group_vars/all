@@ -9,20 +9,21 @@ round_db_user: roundcube
 round_db_password: secretpassword
 
 #nginx config for vimbadmin and roundcube
-vim_server_hostname: mailadmin.example.com
+vim_server_hostname: mailadmin.accesor.tk
+round_server_hostname: roundcube.example.com
 
 #email domains you want to use
-domain_com: example.com
-hostname_domain_com: mail.example.com
+domain_com: accesor.tk
+hostname_domain_com: mail.accesor.tk
 
 #add email account: user@domain.com with account_password
 account_password: redgoblinadmin
-useratdomain_com: admin@example.com
+useratdomain_com: admin@accesor.tk
 user: admin
 
 #add alias email. all emails from alias will be sent to
 #user@domain.com
-aliasatdomain_com: postmaster@example.com
+aliasatdomain_com: postmaster@accesor.tk
 alias: postmaster
 
 postfix_dir: /etc/postfix
@@ -42,4 +43,4 @@ State: Bucharest
 Locality: Bucharest
 Organization: RedGoblin
 OrgUnit: IT
-FQDN: example.com
+FQDN: accesor.tk
